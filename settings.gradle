@@ -1,2 +1,4 @@
 rootProject.name = 'gift-certificates'
-include('web', 'api')
+include('core', 'api')
+
+
