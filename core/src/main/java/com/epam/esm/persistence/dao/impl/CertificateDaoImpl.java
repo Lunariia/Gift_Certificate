@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,7 @@ public class CertificateDaoImpl implements CertificateDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final ResultSetExtractor<List<Certificate>> certificateListExtractor;
     private final ResultSetExtractor<Optional<Certificate>> certificateExtractor;
+
 
     @Autowired
     public CertificateDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate,

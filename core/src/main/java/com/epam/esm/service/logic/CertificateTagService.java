@@ -35,7 +35,7 @@ public interface CertificateTagService {
      * @throws IllegalArgumentException when certificateId is not valid
      * @throws DaoException             when one of created CertificateTags invalid
      */
-    void updateTagSet(Long certificateId, Set<Tag> tags) throws DaoException;
+    void updateTags(Long certificateId, Set<Tag> tags) throws DaoException;
 
     /**
      * Deletes all CertificateTags matching specified certificate id

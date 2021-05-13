@@ -272,7 +272,7 @@ public class CertificateServiceImplTest {
         certificateService.create(CERTIFICATE_NETHER_ID_NO_TAGS);
         //then
         verify(certificateTagService, never()).addTagSet(anyLong(), anySet());
-        verify(certificateTagService, never()).updateTagSet(anyLong(), anySet());
+        verify(certificateTagService, never()).updateTags(anyLong(), anySet());
     }
 
     @Test
@@ -519,7 +519,7 @@ public class CertificateServiceImplTest {
         //when
         Certificate updated = certificateService.selectiveUpdate(CERTIFICATE_WITH_ID);
         //then
-        verify(certificateTagService, times(1)).updateTagSet(ID_VALID, new HashSet<>(TAGS_WITH_ID));
+        verify(certificateTagService, times(1)).updateTags(ID_VALID, new HashSet<>(TAGS_WITH_ID));
     }
 
     @Test

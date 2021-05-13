@@ -56,7 +56,7 @@ public class CertificateTagServiceImpl implements CertificateTagService {
 
     @Override
     @Transactional
-    public void updateTagSet(Long certificateId, Set<Tag> tags) throws DaoException {
+    public void updateTags(Long certificateId, Set<Tag> tags) throws DaoException {
         Preconditions.checkNotNull(certificateId, "Invalid ID parameter: " + certificateId);
         Preconditions.checkNotNull(tags, "Invalid tags parameter: " + tags);
         Preconditions.checkArgument(certificateId >= MIN_ID_VALUE, "Invalid ID parameter: " + certificateId);

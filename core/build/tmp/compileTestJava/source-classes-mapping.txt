@@ -1,0 +1,10 @@
+com/epam/esm/service/validator/TagValidatorTest.java
+ com.epam.esm.service.validator.TagValidatorTest
+com/epam/esm/persistence/dao/impl/CertificateDaoImplTest.java
+ com.epam.esm.persistence.dao.impl.CertificateDaoImplTest
+com/epam/esm/service/validator/CertificateTagValidatorTest.java
+ com.epam.esm.service.validator.CertificateTagValidatorTest
+com/epam/esm/service/logic/CertificateServiceImplTest.java
+ com.epam.esm.service.logic.CertificateServiceImplTest
+com/epam/esm/service/validator/CertificateValidatorTest.java
+ com.epam.esm.service.validator.CertificateValidatorTest

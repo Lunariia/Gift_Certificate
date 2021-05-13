@@ -5,16 +5,8 @@ import javax.validation.constraints.Size;
 
 public class CertificateTag {
 
-    @NotNull(message = "Id cannot be null")
-    @Size(min = 1, message = "Id should be more than zero")
     private final Long id;
-
-    @NotNull(message = "CertificateId cannot be null")
-    @Size(min = 1, message = "CertificateId should be more than zero")
     private final Long certificateId;
-
-    @NotNull(message = "TagId cannot be null")
-    @Size(min = 1, message = "TagId should be more than zero")
     private final Long tagId;
 
     public CertificateTag(Long id, Long certificateId, Long tagId) {

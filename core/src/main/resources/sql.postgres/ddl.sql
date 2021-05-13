@@ -22,7 +22,6 @@ CREATE TABLE tag
 CREATE INDEX tag_name_case_insensitive_unique_index ON tag (LOWER(name));
 
 CREATE TABLE certificate_tag(
-    id             BIGSERIAL,
     certificate_id BIGINT NOT NULL REFERENCES certificate (id),
     tag_id         BIGINT NOT NULL REFERENCES tag (id),
     UNIQUE (certificate_id, tag_id)

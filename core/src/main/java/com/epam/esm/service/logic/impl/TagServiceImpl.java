@@ -37,9 +37,6 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag findById(Long id) throws EntityNotFoundException {
-        Preconditions.checkNotNull(id, "Invalid ID parameter: " + id);
-        Preconditions.checkArgument(id >= MIN_ID_VALUE, "Invalid ID parameter: " + id);
-
         return tagDao
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tag does not exists! ID: " + id));
@@ -52,8 +49,6 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Tag create(Tag tag) throws DaoException {
-        Preconditions.checkNotNull(tag, "Tag invalid: " + tag);
-
         if (tag.getId() != null) {
             throw new DaoException("this id now forbidden for new tag! Tag invalid: " + tag);
         }
@@ -92,9 +87,6 @@ public class TagServiceImpl implements TagService {
     @Override
     @Transactional
     public Tag deleteById(Long id) throws EntityNotFoundException {
-        Preconditions.checkNotNull(id, "Invalid ID parameter: " + id);
-        Preconditions.checkArgument(id >= MIN_ID_VALUE, "Invalid ID parameter: " + id);
-
         Tag target = tagDao
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tag does not exists! ID: " + id));

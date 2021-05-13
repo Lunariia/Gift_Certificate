@@ -2,6 +2,7 @@ package com.epam.esm.persistence.dao.impl;
 
 import com.epam.esm.persistence.dao.TagDao;
 import com.epam.esm.persistence.entity.Tag;
+import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -17,15 +18,15 @@ import java.util.*;
 public class TagDaoImpl implements TagDao {
 
     private static final String SQL_FIND_BY_NAME = "\n" +
-            "SELECT tag.id   AS tag_id, tag.name AS tag_name \n" +
+            "SELECT tag.id AS tag_id, tag.name AS tag_name \n" +
             "FROM tag WHERE tag.name = :tagName ";
 
     private static final String SQL_FIND_BY_ID = "\n" +
-            "SELECT tag.id   AS tag_id, tag.name AS tag_name \n" +
+            "SELECT tag.id AS tag_id, tag.name AS tag_name \n" +
             "FROM tag WHERE tag.id = :tagId";
 
     private static final String SQL_FIND_ALL = "\n" +
-            "SELECT tag.id   AS tag_id, tag.name AS tag_name \n" +
+            "SELECT tag.id AS tag_id, tag.name AS tag_name \n" +
             "FROM tag \n";
 
     private static final String SQL_INSERT = "INSERT INTO tag (name) VALUES (:name)";
@@ -39,6 +40,8 @@ public class TagDaoImpl implements TagDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final RowMapper<Tag> tagRowMapper;
 
+    public static final long MIN_ID_VALUE = 1L;
+
     @Autowired
     public TagDaoImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate, RowMapper<Tag> tagRowMapper) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -47,6 +50,9 @@ public class TagDaoImpl implements TagDao {
 
     @Override
     public Optional<Tag> findById(Long tagId) {
+        Preconditions.checkNotNull(tagId, "Invalid ID parameter: " + tagId);
+        Preconditions.checkArgument(tagId >= MIN_ID_VALUE, "Invalid ID parameter: " + tagId);
+
         Map<String, Object> namedParameters = new HashMap<>();
         namedParameters.put("tagId", tagId);
         List<Tag> results = namedParameterJdbcTemplate.query(SQL_FIND_BY_ID, namedParameters, tagRowMapper);
@@ -68,6 +74,8 @@ public class TagDaoImpl implements TagDao {
 
     @Override
     public Tag create(Tag tag) {
+        Preconditions.checkNotNull(tag, "Tag invalid: " + tag);
+
         SqlParameterSource sqlParameterSource = new BeanPropertySqlParameterSource(tag);
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(SQL_INSERT, sqlParameterSource, keyHolder, new String[]{"id"});
@@ -80,6 +88,9 @@ public class TagDaoImpl implements TagDao {
 
     @Override
     public void delete(Long id) {
+        Preconditions.checkNotNull(id, "Invalid ID parameter: " + id);
+        Preconditions.checkArgument(id >= MIN_ID_VALUE, "Invalid ID parameter: " + id);
+
         Map<String, Object> namedParameters = new HashMap<>();
         namedParameters.put("id", id);
         namedParameterJdbcTemplate.update(SQL_DELETE_BY_ID, namedParameters);

@@ -62,5 +62,4 @@ public class TagValidatorTest {
         //then
         Assertions.assertFalse(actual);
     }
-
 }

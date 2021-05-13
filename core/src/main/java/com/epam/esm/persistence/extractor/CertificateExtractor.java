@@ -56,13 +56,20 @@ public class CertificateExtractor implements ResultSetExtractor<Optional<Certifi
                 );
             }
 
-            Long tagId = resultSet.getObject(COLUMN_TAG_ID, Long.class);
-            if (tagId != null) {
-                String tagName = resultSet.getString(COLUMN_TAG_NAME);
-                Tag tag = new Tag(tagId, tagName);
-                tags.add(tag);
-            }
+            tags = extractTag(resultSet);
         }
         return Optional.ofNullable(certificate);
     }
+
+    private Set<Tag> extractTag(ResultSet resultTagSet) throws SQLException {
+        Set<Tag> tags = new HashSet<>();
+        Long tagId = resultTagSet.getObject(COLUMN_TAG_ID, Long.class);
+        if (tagId != null) {
+            String tagName = resultTagSet.getString(COLUMN_TAG_NAME);
+            Tag tag = new Tag(tagId, tagName);
+            tags.add(tag);
+        }
+        return tags;
+    }
+
 }

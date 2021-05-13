@@ -117,18 +117,20 @@ public class CertificateServiceImpl implements CertificateService {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Certificate does not exists! ID: " + id));
 
-        String sourceName = certificate.getName();
-        String sourceDescription = certificate.getDescription();
-        BigDecimal sourcePrice = certificate.getPrice();
-        Integer sourceDuration = certificate.getDuration();
-        Set<Tag> sourceTags = certificate.getTags();
+//        String sourceName = certificate.getName();
+//        String sourceDescription = certificate.getDescription();
+//        BigDecimal sourcePrice = certificate.getPrice();
+//        Integer sourceDuration = certificate.getDuration();
+//        Set<Tag> sourceTags = certificate.getTags();
 
-        String name = sourceName == null ? existedCertificate.getName() : sourceName;
-        String description = sourceDescription == null ? existedCertificate.getDescription() : sourceDescription;
-        BigDecimal price = sourcePrice == null ? existedCertificate.getPrice() : sourcePrice;
-        Integer duration = sourceDuration == null ? existedCertificate.getDuration() : sourceDuration;
-        Set<Tag> tags = sourceTags == null ? existedCertificate.getTags() : sourceTags;
+        //first method?
+        String name = certificate.getName() == null ? existedCertificate.getName() : certificate.getName();
+        String description = certificate.getDescription() == null ? existedCertificate.getDescription() : certificate.getDescription();
+        BigDecimal price = certificate.getPrice() == null ? existedCertificate.getPrice() : certificate.getPrice();
+        Integer duration = certificate.getDuration() == null ? existedCertificate.getDuration() : certificate.getDuration();
+        Set<Tag> tags = certificate.getTags() == null ? existedCertificate.getTags() : certificate.getTags();
 
+        //second private method?
         Certificate certificateToUpdate = Certificate.Builder
                 .from(existedCertificate)
                 .setName(name)
@@ -159,7 +161,7 @@ public class CertificateServiceImpl implements CertificateService {
                 .build();
 
         Long id = updatedWithTags.getId();
-        certificateTagService.updateTagSet(id, savedTags);
+        certificateTagService.updateTags(id, savedTags);
 
         return updatedWithTags;
     }

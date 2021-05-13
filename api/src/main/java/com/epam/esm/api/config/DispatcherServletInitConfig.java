@@ -11,6 +11,8 @@ import javax.servlet.Filter;
 
 public class DispatcherServletInitConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+    public static final String ALL_REQUESTS = "/";
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?>[]{
@@ -28,7 +30,7 @@ public class DispatcherServletInitConfig extends AbstractAnnotationConfigDispatc
     @Override
     @NonNull
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{ALL_REQUESTS};
     }
 
     @Override

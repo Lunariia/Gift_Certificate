@@ -24,7 +24,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class PersistenceConfig {
 
-    private static final String HIKARI_PROPS = "property/hikari.properties";
+    private static final String HIKARI_PROPS = "properties/hikari.properties";
 
     @Bean(destroyMethod = "close")
     public HikariDataSource dataSource() throws IOException {
@@ -35,14 +35,12 @@ public class PersistenceConfig {
     }
 
     @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate() throws IOException {
-        DataSource dataSource = dataSource();
+    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
         return new NamedParameterJdbcTemplate(dataSource);
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() throws IOException {
-        DataSource dataSource = dataSource();
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 

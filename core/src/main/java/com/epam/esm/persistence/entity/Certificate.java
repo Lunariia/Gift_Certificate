@@ -11,36 +11,13 @@ import java.util.Set;
 
 public class Certificate {
 
-    @NotNull(message = "Id cannot be null")
-    @Size(min = 1, message = "Id should be more than zero")
     private final Long id;
-
-    @NotNull(message = "Name cannot be null")
-    @Size(max = 150, message = "Name should be less than 150")
-    @NotEmpty(message = "Name cannot be null")
     private final String name;
-
-    @NotNull(message = "Description cannot be null")
-    @Size(max = 255, message = "Description should be less than 255")
-    @NotEmpty(message = "Description cannot be null")
     private final String description;
-
-    @NotNull(message = "Price cannot be null")
-    @Size(min = 0, max = 99999, message = "Price should not be less than zero")
     private final BigDecimal price;
-
-    @NotNull(message = "Duration cannot be null")
-    @Size(min = 1, message = "Duration should be more than zero")
     private final Integer duration;
-
-    @NotNull(message = "CreateDate cannot be null")
     private final LocalDateTime createDate;
-
-    @NotNull(message = "LastUpdateDate cannot be null")
     private final LocalDateTime lastUpdateDate;
-
-    @NotNull(message = "Tags cannot be null")
-    @Valid
     private final Set<Tag> tags;
 
     public Certificate(Long id,

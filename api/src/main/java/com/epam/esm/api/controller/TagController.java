@@ -4,7 +4,6 @@ import com.epam.esm.api.dto.TagDto;
 import com.epam.esm.api.validator.TagDtoValidator;
 import com.epam.esm.exception.DaoException;
 import com.epam.esm.exception.EntityNotFoundException;
-import com.epam.esm.exception.ServiceException;
 import com.epam.esm.persistence.entity.Tag;
 import com.epam.esm.service.logic.TagService;
 import org.modelmapper.ModelMapper;
@@ -43,7 +42,7 @@ public class TagController {
     }
 
     @GetMapping()
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<List<TagDto>> findAll() {
         List<Tag> tagList = tagService.findAll();
         List<TagDto> tagDtoList = tagList
                 .stream()
